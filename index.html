@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SHOWCASE - DRE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, Helvetica, sans-serif;}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+cursor:crosshair;
+}
+
+/* ===== ULTRA AAA BACKGROUND ===== */
+.bg{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+z-index:-3;
+background:radial-gradient(circle at 20% 20%, rgba(255,0,0,0.25), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(255,0,0,0.15), transparent 40%),
+linear-gradient(120deg,#050505,#0a0000,#050505);
+background-size:200% 200%;
+animation:bgMove 10s ease infinite;
+filter:blur(0px);
+}
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* floating particles */
+.particles span{
+position:absolute;
+width:4px;height:4px;
+background:red;
+opacity:0.2;
+border-radius:50%;
+animation:float 12s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh) scale(0.5)}
+100%{transform:translateY(-10vh) scale(1)}
+}
+
+/* ===== GLASS TOP UI ===== */
+.topbar{
+position:sticky;
+top:0;
+z-index:10;
+backdrop-filter: blur(20px);
+background:rgba(255,255,255,0.05);
+border-bottom:1px solid rgba(255,0,0,0.2);
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+animation:fadeDown 1s ease;
+}
+@keyframes fadeDown{
+from{transform:translateY(-20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+color:#ff2b2b;
+text-shadow:0 0 10px red;
+}
+
+.menu button{
+margin:0 5px;
+padding:8px 12px;
+border:none;
+border-radius:8px;
+background:rgba(255,0,0,0.2);
+color:white;
+cursor:pointer;
+transition:0.3s;
+backdrop-filter: blur(10px);
+}
+.menu button:hover{
+background:red;
+transform:scale(1.05);
+}
+
+/* ===== CREATOR CARD (GLASS AAA) ===== */
+.creator{
+margin:30px auto;
+width:90%;max-width:600px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,0,0,0.3);
+border-radius:20px;
+padding:20px;
+backdrop-filter: blur(25px);
+box-shadow:0 0 30px rgba(255,0,0,0.2);
+transition:0.4s;
+animation:fadeUp 1s ease;
+}
+.creator:hover{
+transform:scale(1.02);
+box-shadow:0 0 40px red;
+}
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.creator-info{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.creator img{
+width:90px;height:90px;
+border-radius:50%;
+border:2px solid red;
+}
+
+.creator h2{color:#ff2b2b;}
+.creator p{color:#aaa;font-size:13px;}
+
+.topbar-hover{
+position:absolute;
+top:-50px;
+left:0;
+width:100%;
+background:rgba(0,0,0,0.8);
+border:1px solid red;
+padding:8px;
+text-align:center;
+opacity:0;
+transition:0.3s;
+font-size:12px;
+}
+.creator:hover .topbar-hover{
+opacity:1;
+top:-40px;
+}
+
+/* ===== GRID ===== */
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,0,0,0.25);
+border-radius:18px;
+padding:15px;
+backdrop-filter: blur(20px);
+transition:0.3s;
+position:relative;
+overflow:hidden;
+animation:fadeUp 1s ease;
+}
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 25px red;
+}
+
+.card img{
+width:100%;border-radius:12px;margin-bottom:10px;
+}
+
+.card h3{color:#ff2b2b;font-size:15px;}
+
+.tag{
+display:inline-block;
+margin-top:8px;
+padding:5px 10px;
+border-radius:20px;
+background:rgba(255,0,0,0.2);
+font-size:12px;
+}
+
+button.watch{
+margin-top:10px;
+padding:8px 12px;
+border:none;
+border-radius:8px;
+background:red;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+button.watch:hover{
+background:#ff3b3b;
+transform:scale(1.05);
+}
+
+/* bottom */
+.bottom-right{
+position:fixed;
+bottom:10px;
+right:15px;
+font-size:12px;
+color:#888;
+}
+
+/* subtle glow lines */
+.glowline{
+position:fixed;
+width:1px;
+height:100%;
+background:linear-gradient(to bottom,transparent,red,transparent);
+opacity:0.1;
+animation:moveLine 6s linear infinite;
+}
+@keyframes moveLine{
+0%{transform:translateX(0)}
+100%{transform:translateX(100vw)}
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="particles"></div>
+<div class="glowline"></div>
+
+<!-- TOP GLASS MENU -->
+<div class="topbar">
+<div class="logo">NOVA SYSTEMS</div>
+<div class="menu">
+<button onclick="setFilter('ALL')">ALL</button>
+<button onclick="setFilter('ROBLOX SYSTEM')">SYSTEM</button>
+<button onclick="setFilter('ANTI CHEAT')">ANTI CHEAT</button>
+</div>
+</div>
+
+<!-- CREATOR -->
+<div class="creator" onclick="window.open('https://www.roblox.com/users/890941690/profile','_blank')">
+<div class="topbar-hover">Drev • @carlgoodguy2663 • 3 Years In Roblox Studio</div>
+<div class="creator-info">
+<img src="https://www.roblox.com/headshot-thumbnail/image?userId=890941690&width=420&height=420&format=png" />
+<div>
+<h2>Drev</h2>
+<p>@carlgoodguy2663</p>
+<p>3 Years In Roblox Studio</p>
+</div>
+</div>
+</div>
+
+<!-- GRID -->
+<div class="container" id="grid"></div>
+
+<div class="bottom-right">MADE BY DRE</div>
+
+<script>
+const CHANNEL_ID="UC4EyQDoAywwm5iFAlyviMiQ";
+const RSS_URL=`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+
+let all=[];
+let current="ALL";
+
+const grid=document.getElementById("grid");
+const particles=document.querySelector('.particles');
+
+for(let i=0;i<30;i++){
+let s=document.createElement('span');
+s.style.left=Math.random()*100+'%';
+s.style.animationDuration=(5+Math.random()*10)+'s';
+particles.appendChild(s);
+}
+
+function cat(t){t=t.toLowerCase();return t.includes("anti cheat")?"ANTI CHEAT":"ROBLOX SYSTEM";}
+
+function setFilter(f){current=f;render();}
+
+function render(){
+grid.innerHTML="";
+all.forEach(v=>{
+let c=cat(v.title);
+if(current!="ALL" && c!=current) return;
+let card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<img src="${v.thumb}" />
+<h3>${v.title}</h3>
+<p>${(v.desc||"").substring(0,90)}...</p>
+<span class="tag">${c}</span><br>
+<button class="watch" onclick="window.open('${v.link}','_blank')">WATCH</button>
+`;
+grid.appendChild(card);
+});
+}
+
+async function load(){
+let res=await fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(RSS_URL));
+let d=await res.json();
+all=(d.items||[]).map(x=>({title:x.title,desc:x.description,link:x.link,thumb:x.thumbnail}));
+render();
+}
+
+load();
+</script>
+
+</body>
+</html>
